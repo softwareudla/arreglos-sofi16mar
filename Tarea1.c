@@ -1,37 +1,59 @@
-// Juan José Espinosa y Sofía Martínez
+//Juan José Espinosa y Sofía Martínez
 
 #include <stdio.h>
- 
+
 int main() {
-    int notas[5][3];
-    int i, j, suma, mayornota, menornota;
+    float notas[5][3];
+    int i, j;
+    float suma=0, mayornota, menornota;
     float promedioest[5];
     float promediomat[3];
     int aprobados[3] = {0, 0, 0};
     int reprobados[3] = {0, 0, 0};
+    char nombres[5][20];
+    char materia[3][20];
+   
+
+    for (i = 0; i < 5 ; i++) {
+        printf("Ingrese el nombre del estudiante %d: ", i + 1);
+        scanf("%s", nombres[i]);
+    }
+
+    printf( "\n" );    
+
+    for (j = 0; j < 3 ; j++) {
+        printf("Ingres el nombre de la materia %d: ", j + 1);
+        scanf("%s", materia[j]);
+
+    }
  
-    // Ingresar notas
+
+    // Ingresar calificaciones
     for (i = 0; i < 5; i++) {
-        printf("Ingrese las calificación del estudiante %d:\n", i+1);
+        printf("Ingrese las calificación del estudiante %s:\n", nombres[i]);
         for (j = 0; j < 3; j++) {
             do {
-                printf("Materia %d (0-10): ", j+1);
-                scanf("%d", &notas[i][j]);
+                printf("Materia %s (0-10): ",materia[j]);
+                scanf("%f", &notas[i][j]);
             } while (notas[i][j] < 0 || notas[i][j] > 10);
         }
     }
+
     printf("\n");
-    // Calcular el promedio de cada estudiante
+
+    // Calcular Promedio de Cada Estudiante
     for (i = 0; i < 5; i++) {
         suma = 0;
         for (j = 0; j < 3; j++) {
             suma += notas[i][j];
         }
         promedioest[i] = suma / 3.0;
-        printf("El promedio del estudiante %d es: %.2f\n", i+1, promedioest[i]);
+        printf("El promedio del estudiante %s es: %.2f\n", nombres[i], promedioest[i]);
     }
-    printf("\n");
-   
+
+      printf("\n");
+
+    // Calcular Promedio de Cada Materia
     for (j = 0; j < 3; j++) {
         suma = 0;  
         for (i = 0; i < 5; i++) {
@@ -43,11 +65,13 @@ int main() {
             }
         }
         promediomat[j] = suma / 5.0;
-        printf("El promedio de la materia %d es: %.2f\n", j+1, promediomat[j]);
-        printf("Materia %d: %d aprobados, %d reprobados\n", j+1, aprobados[j], reprobados[j]);
+        printf("El promedio de la materia %s es: %.2f\n", materia[j], promediomat[j]);
+        printf("Materia %s: %d aprobados, %d reprobados\n", materia[j], aprobados[j], reprobados[j]);
     }
+   
     printf("\n");
-    // Calcular nota max y min por estudiante
+   
+    // Calcular Nota Max y Min por Estudiante
     for(i = 0; i < 5; i++) {
         mayornota = notas[i][0];
         menornota = notas[i][0];
@@ -59,10 +83,12 @@ int main() {
                 menornota = notas[i][j];
             }
         }
-        printf("Estudiante %d: Máxima Nota = %d, Mínima Nota = %d\n", i+1, mayornota, menornota);
+        printf("Estudiante %s: Máxima Nota = %.2f, Mínima Nota = %.2f\n", nombres[i], mayornota, menornota);
     }
+   
     printf("\n");
-    // Calcular nota max y min por materia
+   
+    // Calcular Nota Max y Min por Materia
     for(j = 0; j < 3; j++) {
         mayornota = notas[0][j];
         menornota = notas[0][j];
@@ -74,8 +100,8 @@ int main() {
                 menornota = notas[i][j];    
             }
         }
-        printf("Materia %d: Máxima Nota = %d, Mínima Nota = %d\n", j+1, mayornota, menornota);  
+        printf("Materia %s: Máxima Nota = %.2f, Mínima Nota = %.2f\n", materia[j], mayornota, menornota);  
     }
- 
+
     return 0;
 }
